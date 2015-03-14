@@ -1,0 +1,11 @@
+
+complete  <- function(directory, id = 1:332) {
+      Files.csv <- dir(directory)
+      File.in <- lapply(id,function(x){
+            Y<-read.csv(paste0(directory,"\\",Files.csv[x]))
+            c(max(Y[,"ID"]),sum(complete.cases(Y)))
+      })
+      combined <- as.data.frame(do.call(rbind,File.in))
+      colnames(combined) <- c("id","nobs")
+      print(combined)
+}
