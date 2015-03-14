@@ -1,0 +1,8 @@
+
+pollutantmean <- function(directory, pollutant, id = 1:332) {
+      Files.csv <- dir(directory)
+      File.in <- lapply(id,function(x)read.csv(paste0(directory,"\\",Files.csv[x])))
+      combined <- do.call(rbind,File.in)
+      output <- mean(combined[,match(pollutant,colnames(combined))],na.rm = TRUE)
+      print(output)
+}
