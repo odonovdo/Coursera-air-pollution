@@ -1,0 +1,16 @@
+
+corr <- function(directory, threshold = 0) {
+      Files.csv <- dir(directory)
+      File.in <- sapply(seq_along(Files.csv),function(x){
+            Y <-read.csv(paste0(directory,"\\",Files.csv[x]))
+            if(sum(complete.cases(Y)) > threshold){
+                  cor(Y[,"nitrate"],Y[,"sulfate"],use ="complete.obs" )
+            }else{
+                  NA
+            } 
+      })
+      if(sum(is.na(File.in))== length(File.in)){
+            as.numeric()
+      }else{
+            File.in[!is.na(File.in)]
+      }}
